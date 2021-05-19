@@ -1,0 +1,35 @@
+---
+# YAML documents begin with the document separator ---
+
+# The minus in YAML this indicates a list item. The playbook contains a list of
+# plays, with each play being a dictionary
+-
+  # Target: where our play will run and options it will run with
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  # Task: the list of tasks that will be executed within the play, this section
+  # can also be used for pre and post tasks
+  tasks:
+    - name: Create a security group in aws for SSH access and HTTP
+      ec2_group:
+         name: ansible
+         description: ANsible Security Group
+         region: us-east-2
+         rules:
+           - proto: tcp
+             from_port: 80
+             to_port: 80
+             cidr_ip: 0.0.0.0/0
+           - proto: tcp
+             from_port: 22
+             to_port: 22
+             cidr_ip: 0.0.0.0/0
+         aws_access_key: 'AKIA34WMZAA64LDQ7J7M'
+         aws_secret_key: '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'
+
+# Three dots indicate the end of a YAML document
+...
+        
+
