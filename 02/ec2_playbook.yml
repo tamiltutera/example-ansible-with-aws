@@ -9,9 +9,9 @@
   connection: local
   gather_facts: false
 
-  vars:
-    aws_access_key: 'AKIA34WMZAA64LDQ7J7M'
-    aws_secret_key: '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'
+  # vars:
+  #  aws_access_key: 'AKIA34WMZAA64LDQ7J7M'
+  #  aws_secret_key: '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'
   # Task: the list of tasks that will be executed within the play, this section
   # can also be used for pre and post tasks
   tasks:
@@ -29,14 +29,14 @@
              from_port: 22
              to_port: 22
              cidr_ip: 0.0.0.0/0
-         aws_access_key: 'AKIA34WMZAA64LDQ7J7M'
-         aws_secret_key: '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'
+        # aws_access_key: 'AKIA34WMZAA64LDQ7J7M'
+        # aws_secret_key: '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'
     - name: Provision a set of instances
       ec2:
-        key_name: ansibletut
+        key_name: tamiltutera_instances_keypair
         group: ansible
         instance_type: t2.micro
-        image: ami-08962a4068733a2b6  
+        image: ami-03d64741867e7bb94  
         region: us-east-2
         wait: true
         exact_count: 20
@@ -44,8 +44,8 @@
           Name: AnsibleNginxWebServers
         instance_tags:
           Name: Ansible
-        aws_access_key: 'AKIA34WMZAA64LDQ7J7M'
-        aws_secret_key: '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'
+        #aws_access_key: 'AKIA34WMZAA64LDQ7J7M'
+        #aws_secret_key: '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'
       register: ec2
     - name: Add all instance public IPs to host group
       add_host:
@@ -58,5 +58,3 @@
 
 # Three dots indicate the end of a YAML document
 ...
-        
-
